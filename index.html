@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Laís Morandin | Psicóloga Clínica</title>
+
+  <!-- =============================================
+       FONTES — altere as importações e variáveis
+       abaixo para trocar a tipografia do site
+  ============================================== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* =============================================
+       PALETA DE CORES — altere os valores abaixo
+       para mudar toda a identidade visual do site
+    ============================================== */
+    :root {
+      --bg-deep:        #1a1410;   /* fundo principal escuro */
+      --bg-mid:         #221c15;   /* fundo de seções alternadas */
+      --bg-card:        #2b2219;   /* fundo de cards / FAQ */
+      --accent-warm:    #c8a46e;   /* dourado/terracota — cor de destaque */
+      --accent-muted:   #8c6e4b;   /* versão mais sutil do destaque */
+      --text-primary:   #f0e8dc;   /* texto principal claro */
+      --text-secondary: #b09a82;   /* texto secundário / subtítulos */
+      --text-dim:       #6b5a47;   /* texto muito suave / placeholders */
+      --divider:        #3a2e22;   /* linha divisória */
+      --cta-bg:         #c8a46e;   /* fundo do botão CTA */
+      --cta-text:       #1a1410;   /* texto do botão CTA */
+      --cta-hover:      #dbb87e;   /* fundo do botão CTA no hover */
+    }
+
+    /* =============================================
+       RESET & BASE
+    ============================================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--bg-deep);
+      color: var(--text-primary);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    /* Grain overlay para textura de fundo */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.6;
+    }
+
+    /* =============================================
+       TIPOGRAFIA GERAL
+    ============================================== */
+    h1, h2, h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      line-height: 1.2;
+      letter-spacing: 0.01em;
+    }
+
+    /* =============================================
+       NAVEGAÇÃO — altere links e logo aqui
+    ============================================== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.5rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(to bottom, rgba(26,20,16,0.95) 0%, transparent 100%);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent-warm);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--accent-warm); }
+
+    /* =============================================
+       HERO — altere o título, subtítulo e CTA
+    ============================================== */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 0 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Luz ambiente no hero */
+    #hero::after {
+      content: '';
+      position: absolute;
+      top: -10%;
+      right: -5%;
+      width: 55%;
+      height: 80%;
+      background: radial-gradient(ellipse at center, rgba(200,164,110,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      padding-top: 6rem;
+      max-width: 560px;
+    }
+
+    .hero-eyebrow {
+      /* Texto pequeno acima do título principal */
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent-warm);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      width: 2rem;
+      height: 1px;
+      background: var(--accent-warm);
+    }
+
+    .hero-title {
+      /* TÍTULO PRINCIPAL — altere o texto no HTML */
+      font-size: clamp(3rem, 5vw, 5.5rem);
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-title em {
+      color: var(--accent-warm);
+      font-style: italic;
+    }
+
+    .hero-subtitle {
+      font-family: 'Jost', sans-serif;
+      font-size: 1rem;
+      color: var(--text-secondary);
+      letter-spacing: 0.06em;
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+    }
+
+    .hero-text {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      margin-bottom: 3rem;
+      max-width: 440px;
+      line-height: 1.85;
+    }
+
+    /* Botão CTA principal */
+    .btn-cta {
+      display: inline-block;
+      background: var(--cta-bg);
+      color: var(--cta-text);
+      text-decoration: none;
+      padding: 1rem 2.5rem;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .btn-cta:hover {
+      background: var(--cta-hover);
+      transform: translateY(-2px);
+    }
+
+    /* Botão secundário (outline) */
+    .btn-outline {
+      display: inline-block;
+      border: 1px solid var(--accent-muted);
+      color: var(--text-secondary);
+      text-decoration: none;
+      padding: 0.9rem 2.2rem;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      transition: border-color 0.3s, color 0.3s;
+      margin-left: 1rem;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--accent-warm);
+      color: var(--accent-warm);
+    }
+
+    .hero-image {
+      /* Container da foto principal — substitua a imagem pelo src da foto real */
+      position: relative;
+      height: 85vh;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .hero-photo-frame {
+      width: 100%;
+      max-width: 420px;
+      height: 80%;
+      position: relative;
+    }
+
+    /* Placeholder da foto — remova quando tiver a foto real */
+    .hero-photo-placeholder {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(160deg, var(--bg-card) 0%, var(--bg-mid) 60%, rgba(200,164,110,0.05) 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-dim);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      border: 1px solid var(--divider);
+      gap: 0.5rem;
+    }
+
+    /* Quando tiver a foto real, use esta classe:
+       <img class="hero-photo" src="sua-foto.jpg" alt="Laís Morandin"> */
+    .hero-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+
+    /* Ornamento decorativo ao redor da foto */
+    .hero-photo-frame::before {
+      content: '';
+      position: absolute;
+      top: -1.5rem;
+      left: -1.5rem;
+      right: 1.5rem;
+      bottom: 1.5rem;
+      border: 1px solid var(--divider);
+      z-index: -1;
+    }
+
+    /* Credencial flutuante sobre a foto */
+    .hero-badge {
+      position: absolute;
+      bottom: 2rem;
+      left: -2rem;
+      background: var(--bg-deep);
+      border: 1px solid var(--divider);
+      padding: 1rem 1.5rem;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      letter-spacing: 0.05em;
+      line-height: 1.6;
+    }
+
+    .hero-badge strong {
+      display: block;
+      color: var(--accent-warm);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-weight: 400;
+      margin-bottom: 0.2rem;
+    }
+
+    /* =============================================
+       SEÇÕES GENÉRICAS
+    ============================================== */
+    section {
+      padding: 6rem 4rem;
+    }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      /* Label pequena acima do título de seção */
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent-warm);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .section-label::before {
+      content: '';
+      width: 1.5rem;
+      height: 1px;
+      background: var(--accent-warm);
+    }
+
+    .section-title {
+      /* Título principal de cada seção */
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      color: var(--text-primary);
+      margin-bottom: 2rem;
+    }
+
+    .divider-line {
+      width: 100%;
+      height: 1px;
+      background: var(--divider);
+      margin: 0;
+    }
+
+    /* =============================================
+       SOBRE — seção de apresentação da psicóloga
+    ============================================== */
+    #sobre {
+      background: var(--bg-mid);
+    }
+
+    .sobre-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 6rem;
+      align-items: start;
+    }
+
+    .sobre-aside {
+      position: sticky;
+      top: 7rem;
+    }
+
+    /* Foto secundária da seção Sobre
+       Substitua o placeholder pela tag <img class="sobre-photo" ...> */
+    .sobre-photo-wrap {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: linear-gradient(160deg, var(--bg-card), var(--bg-deep));
+      border: 1px solid var(--divider);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-dim);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      margin-bottom: 1.5rem;
+    }
+
+    .sobre-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .sobre-crp {
+      /* Número CRP / credenciais */
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      border-top: 1px solid var(--divider);
+      padding-top: 1rem;
+    }
+
+    .sobre-text p {
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+      font-size: 1.05rem;
+    }
+
+    .sobre-text p:first-child {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.3rem, 2vw, 1.7rem);
+      color: var(--text-primary);
+      line-height: 1.5;
+    }
+
+    /* =============================================
+       PSICANÁLISE — explicação da abordagem
+    ============================================== */
+    #psicanalise {
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Luz ambiente sutil */
+    #psicanalise::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 50%;
+      background: radial-gradient(ellipse at center bottom, rgba(200,164,110,0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .psicanalise-intro {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      margin-bottom: 5rem;
+    }
+
+    .psicanalise-intro-text {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      line-height: 1.85;
+    }
+
+    .psicanalise-quote {
+      /* Citação em destaque */
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.4rem, 2.2vw, 2rem);
+      font-style: italic;
+      color: var(--text-primary);
+      line-height: 1.5;
+      border-left: 2px solid var(--accent-warm);
+      padding-left: 2rem;
+      display: flex;
+      align-items: center;
+    }
+
+    /* Cards de conceitos da psicanálise */
+    .conceitos-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .conceito-card {
+      /* Altere o background e border para mudar o estilo dos cards */
+      background: var(--bg-card);
+      border: 1px solid var(--divider);
+      padding: 2rem;
+      transition: border-color 0.3s;
+    }
+
+    .conceito-card:hover {
+      border-color: var(--accent-muted);
+    }
+
+    .conceito-numero {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      color: var(--accent-warm);
+      opacity: 0.3;
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .conceito-titulo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      color: var(--text-primary);
+      margin-bottom: 0.75rem;
+    }
+
+    .conceito-texto {
+      font-size: 0.93rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* =============================================
+       ATENDIMENTO — como funciona
+    ============================================== */
+    #atendimento {
+      background: var(--bg-mid);
+    }
+
+    .atendimento-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .atendimento-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .step {
+      display: flex;
+      gap: 2rem;
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--divider);
+    }
+
+    .step:first-child { padding-top: 0; }
+
+    .step-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      color: var(--accent-warm);
+      opacity: 0.4;
+      min-width: 2.5rem;
+      line-height: 1;
+      padding-top: 0.25rem;
+    }
+
+    .step-titulo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .step-texto {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.75;
+    }
+
+    .atendimento-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .info-card {
+      background: var(--bg-card);
+      border: 1px solid var(--divider);
+      padding: 1.75rem;
+    }
+
+    .info-card-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent-warm);
+      margin-bottom: 0.5rem;
+    }
+
+    .info-card-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      color: var(--text-primary);
+    }
+
+    .info-card-desc {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      margin-top: 0.4rem;
+      line-height: 1.6;
+    }
+
+    /* =============================================
+       FAQ — dúvidas frequentes
+    ============================================== */
+    #faq {
+      /* Altere o background para mudar o fundo do FAQ */
+    }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.8fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .faq-intro {
+      position: sticky;
+      top: 7rem;
+    }
+
+    .faq-intro p {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      margin-top: 1.5rem;
+      line-height: 1.8;
+    }
+
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--divider);
+      overflow: hidden;
+    }
+
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      color: var(--text-primary);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      text-align: left;
+      padding: 1.75rem 0;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      transition: color 0.3s;
+    }
+
+    .faq-question:hover { color: var(--accent-warm); }
+
+    .faq-icon {
+      color: var(--accent-warm);
+      font-size: 1.2rem;
+      transition: transform 0.3s;
+      flex-shrink: 0;
+    }
+
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s;
+    }
+
+    .faq-item.open .faq-answer {
+      max-height: 400px;
+    }
+
+    .faq-answer-inner {
+      padding-bottom: 1.75rem;
+      color: var(--text-secondary);
+      font-size: 0.97rem;
+      line-height: 1.8;
+    }
+
+    /* =============================================
+       CONTATO — seção final com CTA forte
+    ============================================== */
+    #contato {
+      background: var(--bg-mid);
+      text-align: center;
+    }
+
+    .contato-inner {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .contato-title {
+      font-size: clamp(2.5rem, 5vw, 5rem);
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+
+    .contato-title em {
+      color: var(--accent-warm);
+      font-style: italic;
+    }
+
+    .contato-text {
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 3rem;
+    }
+
+    .contato-links {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 3rem;
+    }
+
+    .contato-link-item {
+      /* Linha de contato individual */
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.88rem;
+      letter-spacing: 0.06em;
+      transition: color 0.3s;
+    }
+
+    .contato-link-item:hover { color: var(--accent-warm); }
+
+    .contato-link-item span {
+      width: 1.5rem;
+      height: 1px;
+      background: currentColor;
+    }
+
+    /* =============================================
+       FOOTER
+       Altere nome, CRP e links nas redes sociais
+    ============================================== */
+    footer {
+      padding: 2.5rem 4rem;
+      border-top: 1px solid var(--divider);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      letter-spacing: 0.06em;
+    }
+
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* =============================================
+       RESPONSIVE — ajustes para mobile
+    ============================================== */
+    @media (max-width: 900px) {
+      nav { padding: 1.5rem 2rem; }
+      .nav-links { display: none; }
+
+      section { padding: 5rem 2rem; }
+
+      #hero {
+        grid-template-columns: 1fr;
+        padding: 8rem 2rem 4rem;
+        gap: 3rem;
+        min-height: auto;
+      }
+
+      .hero-image { height: 60vw; }
+      .hero-badge { left: 0; bottom: 1rem; }
+
+      .sobre-grid,
+      .psicanalise-intro,
+      .atendimento-grid,
+      .faq-grid { grid-template-columns: 1fr; gap: 3rem; }
+
+      .sobre-aside { position: static; }
+      .faq-intro { position: static; }
+
+      .conceitos-grid { grid-template-columns: 1fr; }
+
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+
+    /* =============================================
+       ANIMAÇÕES DE ENTRADA
+       Remove ou ajusta as classes .fade-up conforme necessário
+    ============================================== */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- =============================================
+       NAVEGAÇÃO
+       Altere os links e o nome no logo
+  ============================================== -->
+  <nav>
+    <a href="#hero" class="nav-logo">Laís Morandin</a>
+    <ul class="nav-links">
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#psicanalise">Psicanálise</a></li>
+      <li><a href="#atendimento">Atendimento</a></li>
+      <li><a href="#faq">Dúvidas</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+  </nav>
+
+
+  <!-- =============================================
+       HERO — primeira dobra do site
+       Altere: título, subtítulo, texto introdutório e botões
+  ============================================== -->
+  <section id="hero">
+    <div class="hero-content">
+
+      <!-- Altere o texto da eyebrow abaixo -->
+      <div class="hero-eyebrow">Psicóloga Clínica · Psicanálise</div>
+
+      <!-- TÍTULO PRINCIPAL — altere conforme preferência -->
+      <h1 class="hero-title">
+        Laís<br><em>Morandin</em>
+      </h1>
+
+      <!-- Subtítulo abaixo do nome -->
+      <p class="hero-subtitle">Atendimento individual · Online · Todo o Brasil</p>
+
+      <!-- Parágrafo de apresentação rápida -->
+      <p class="hero-text">
+        Um espaço para o que não consegue ser dito em nenhum outro lugar.
+        Para quem sente que algo insiste — sem saber exatamente o quê.
+      </p>
+
+      <!-- CTAs — altere o link do WhatsApp para o número real -->
+      <!-- Formato: https://wa.me/55DDDNÚMERO?text=MENSAGEM -->
+      <a href="https://wa.me/5521995485887?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20entrevista%20inicial" class="btn-cta" target="_blank">
+        Agendar primeira sessão
+      </a>
+      <a href="#sobre" class="btn-outline">Saiba mais</a>
+
+    </div>
+
+    <div class="hero-image">
+      <div class="hero-photo-frame">
+
+        <!-- =============================================
+             FOTO PRINCIPAL DO HERO
+             Quando tiver a foto, substitua o placeholder abaixo por:
+             <img class="hero-photo" src="foto-lais-hero.jpg" alt="Laís Morandin, psicóloga">
+        ============================================== -->
+        <div class="hero-photo-placeholder">
+          <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+          Inserir foto
+        </div>
+
+        <!-- Credencial flutuante — altere CRP e formação -->
+        <div class="hero-badge">
+          <strong>CRP XXXZZZWWW</strong>
+          Psicóloga Clínica · UFRJ<br>
+          Orientada pela Psicanálise
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider-line"></div>
+
+
+  <!-- =============================================
+       SOBRE — apresentação da psicóloga
+       Altere: texto biográfico, foto e CRP
+  ============================================== -->
+  <section id="sobre">
+    <div class="section-inner">
+      <div class="sobre-grid">
+
+        <div class="sobre-aside fade-up">
+
+          <!-- =============================================
+               FOTO DA SEÇÃO SOBRE
+               Substitua o placeholder por:
+               <img class="sobre-photo" src="foto-lais-sobre.jpg" alt="Laís Morandin">
+          ============================================== -->
+          <div class="sobre-photo-wrap">
+            <div style="text-align:center; color: var(--text-dim); font-size:0.72rem; letter-spacing:0.1em;">
+              <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24" style="margin-bottom:0.5rem; display:block; margin-left:auto; margin-right:auto;"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+              Inserir foto
+            </div>
+          </div>
+
+          <!-- Altere o CRP real aqui -->
+          <div class="sobre-crp">
+            CRP XXXZZZWWW · Psicóloga Clínica<br>
+            UFRJ · Rio de Janeiro
+          </div>
+        </div>
+
+        <div class="sobre-text fade-up">
+          <div class="section-label">Sobre mim</div>
+
+          <!-- PARÁGRAFO DE ABERTURA EM DESTAQUE — altere conforme tom desejado -->
+          <p>
+            Sou Laís Morandin, psicóloga clínica formada pela Universidade Federal do Rio de Janeiro, orientada pela Psicanálise.
+          </p>
+
+          <!-- Parágrafos de desenvolvimento biográfico — altere livremente -->
+          <p>
+            Meu trabalho é com jovens, adultos e idosos que carregam algo que ainda não encontrou palavras. Que sentem que algo insiste — nos relacionamentos, no corpo, nos padrões que se repetem — mas não conseguem decifrar o quê.
+          </p>
+
+          <p>
+            Acredito que falar, em um espaço de escuta de verdade, move coisas que nenhuma outra ferramenta consegue. Não porque a psicanálise tenha respostas prontas — mas porque ela cria condições para que você mesmo possa encontrá-las.
+          </p>
+
+          <!-- Altere a especialização quando confirmada -->
+          <p>
+            Atualmente em especialização em Clínica Psicanalítica no IPUB (Instituto de Psiquiatria da UFRJ), com vinculação a escola de psicanálise.
+          </p>
+
+          <p>
+            Atendo exclusivamente de forma online, o que significa que você pode estar em qualquer cidade do Brasil — ou fora do país — e caminhamos juntos do mesmo jeito.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider-line"></div>
+
+
+  <!-- =============================================
+       PSICANÁLISE — explicação da abordagem
+       Altere: citação em destaque, textos dos cards
+  ============================================== -->
+  <section id="psicanalise">
+    <div class="section-inner">
+
+      <div class="section-label fade-up">A abordagem</div>
+      <h2 class="section-title fade-up">O que é a Psicanálise?</h2>
+
+      <div class="psicanalise-intro fade-up">
+        <p class="psicanalise-intro-text">
+          Imagine que a nossa mente é como um iceberg. Aquilo que vemos na superfície — nossos pensamentos lógicos, nossas decisões do dia a dia — é apenas a pontinha de fora. Abaixo da água existe uma parte gigante e invisível: o Inconsciente.
+          <br><br>
+          É lá que guardamos nossas memórias esquecidas, nossos medos mais profundos e desejos que nem sabíamos que tínhamos. A Psicanálise é o mergulho que fazemos para entender o que acontece nessas profundezas — pois é essa parte submersa que guia a direção da nossa vida.
+        </p>
+
+        <!-- CITAÇÃO EM DESTAQUE — altere o texto conforme desejar -->
+        <div class="psicanalise-quote">
+          "Muitas das nossas escolhas são guiadas pelo Inconsciente. E é justamente aí que a análise pode agir."
+        </div>
+      </div>
+
+      <!-- Cards de conceitos — altere os títulos, números e textos -->
+      <div class="conceitos-grid">
+
+        <div class="conceito-card fade-up">
+          <div class="conceito-numero">01</div>
+          <div class="conceito-titulo">O inconsciente</div>
+          <p class="conceito-texto">
+            Sabe quando você se pega repetindo o mesmo padrão sem entender o porquê? Ou quando percebe sintomas físicos sem causa aparente? Crises de angústia, insônia, sonhos esquisitos — tudo isso é o seu inconsciente agindo.
+          </p>
+        </div>
+
+        <div class="conceito-card fade-up" style="transition-delay: 0.1s;">
+          <div class="conceito-numero">02</div>
+          <div class="conceito-titulo">A fala livre</div>
+          <p class="conceito-texto">
+            Na análise, usamos um método chamado associação livre. A orientação é simples: fale o que vier à cabeça, sem filtros ou julgamentos. É através dessa fala sem amarras que conseguimos acessar o que está escrito nas entrelinhas da sua história.
+          </p>
+        </div>
+
+        <div class="conceito-card fade-up" style="transition-delay: 0.2s;">
+          <div class="conceito-numero">03</div>
+          <div class="conceito-titulo">Assumir o leme</div>
+          <p class="conceito-texto">
+            Com o tempo de análise, torna-se possível escutar suas próprias manifestações de outra forma. Em vez de ser apenas levado pela correnteza do inconsciente, você começa a assumir o leme da sua própria jornada.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider-line"></div>
+
+
+  <!-- =============================================
+       COMO FUNCIONA — passo a passo do atendimento
+       Altere: passos, cards informativos e links
+  ============================================== -->
+  <section id="atendimento">
+    <div class="section-inner">
+
+      <div class="section-label fade-up">O processo</div>
+      <h2 class="section-title fade-up">Como funciona o atendimento</h2>
+
+      <div class="atendimento-grid">
+
+        <!-- Passos do processo — altere livremente -->
+        <div class="atendimento-steps fade-up">
+
+          <div class="step">
+            <div class="step-num">01</div>
+            <div>
+              <div class="step-titulo">A sua parte</div>
+              <p class="step-texto">
+                A orientação é que você fale livremente sobre o que vier à cabeça, sem se preocupar com filtros ou julgamentos. Desde um sonho esquisito até um incômodo do dia a dia — tudo tem lugar aqui.
+              </p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-num">02</div>
+            <div>
+              <div class="step-titulo">A minha parte</div>
+              <p class="step-texto">
+                Como analista, ofereço uma escuta especializada. Posso fazer perguntas, pontuar questões que talvez passem despercebidas e interpretar pontos da sua fala para que, juntos, possamos decifrar os sentidos ocultos do seu inconsciente.
+              </p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-num">03</div>
+            <div>
+              <div class="step-titulo">A primeira sessão</div>
+              <p class="step-texto">
+                Nos conhecemos. Você me conta o que te traz aqui, explico como o tratamento funciona, combinamos horários, valores e compromissos — e decidimos juntos se seguiremos.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Cards informativos — altere os valores conforme necessário -->
+        <div class="atendimento-info fade-up">
+
+          <div class="info-card">
+            <div class="info-card-label">Formato</div>
+            <div class="info-card-value">100% Online</div>
+            <p class="info-card-desc">Você pode estar em qualquer lugar do Brasil — ou fora do país. Caminhamos juntos do mesmo jeito.</p>
+          </div>
+
+          <div class="info-card">
+            <div class="info-card-label">Frequência</div>
+            <div class="info-card-value">Sessões semanais</div>
+            <p class="info-card-desc">O dia, o horário e a frequência são definidos após nossa primeira sessão, considerando sua disponibilidade e o que for combinado entre nós.</p>
+          </div>
+
+          <div class="info-card">
+            <div class="info-card-label">Duração</div>
+            <div class="info-card-value">~50 minutos</div>
+            <p class="info-card-desc">Essa é uma estimativa. A duração real varia de acordo com o que você traz em cada sessão.</p>
+          </div>
+
+          <div class="info-card">
+            <div class="info-card-label">Para quem</div>
+            <div class="info-card-value">Jovens, adultos e idosos</div>
+            <p class="info-card-desc">Atendimentos individuais para quem sente que algo insiste — e quer entender o quê.</p>
+          </div>
+
+          <!-- CTA dentro da seção de atendimento -->
+          <!-- Altere o link do WhatsApp abaixo -->
+          <a href="https://wa.me/5521995485887?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20entrevista%20inicial" class="btn-cta" style="text-align:center; width:100%;" target="_blank">
+            Agendar entrevista inicial
+          </a>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider-line"></div>
+
+
+  <!-- =============================================
+       FAQ — dúvidas frequentes
+       Adicione ou remova .faq-item conforme necessário
+  ============================================== -->
+  <section id="faq">
+    <div class="section-inner">
+      <div class="faq-grid">
+
+        <div class="faq-intro fade-up">
+          <div class="section-label">Dúvidas</div>
+          <h2 class="section-title">Perguntas frequentes</h2>
+          <p>Se tiver uma dúvida que não está aqui, entre em contato. Respondo com prazer.</p>
+        </div>
+
+        <!-- Lista de perguntas e respostas — altere o texto conforme necessário -->
+        <div class="faq-list fade-up">
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              Qual o valor das sessões?
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p class="faq-answer-inner">
+                De acordo com as resoluções do Conselho Federal de Psicologia, não é permitido ao psicólogo divulgar publicamente o valor de seus atendimentos. Se você se interessar em saber mais sobre valores e método de pagamento, entre em contato para que possamos conversar na entrevista inicial.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              Com que frequência são as sessões?
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p class="faq-answer-inner">
+                Os atendimentos costumam ser semanais, mas o dia, o horário e a frequência só são definidos após nossa primeira sessão, considerando sua disponibilidade e o que for combinado entre nós.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              Quanto tempo dura cada sessão?
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p class="faq-answer-inner">
+                As sessões têm uma duração média de 50 minutos. Mas isso é apenas uma estimativa — a duração real varia de acordo com o que você traz em cada encontro.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              Nunca fiz terapia antes. Por onde começo?
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p class="faq-answer-inner">
+                Pelo começo. A primeira sessão é exatamente para isso: nos conhecermos, você me contar o que te traz aqui, entender como funciona o processo e decidirmos juntos se seguiremos. Não há nada que você precise saber ou preparar antes.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              O atendimento online funciona igual ao presencial?
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p class="faq-answer-inner">
+                Sim. O processo analítico se sustenta pela relação que construímos sessão a sessão — e essa relação independe do formato. Você pode estar em qualquer lugar do Brasil, ou fora do país, e caminhamos juntos do mesmo jeito.
+              </p>
+            </div>
+          </div>
+
+          <!-- Adicione novos itens de FAQ aqui seguindo o mesmo padrão -->
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider-line"></div>
+
+
+  <!-- =============================================
+       CONTATO — seção final
+       Altere: WhatsApp, Instagram e e-mail
+  ============================================== -->
+  <section id="contato">
+    <div class="contato-inner">
+
+      <div class="section-label fade-up" style="justify-content: center;">Vamos começar</div>
+
+      <!-- Título da seção de contato — altere conforme desejar -->
+      <h2 class="contato-title fade-up">
+        Pronta para<br><em>embarcar?</em>
+      </h2>
+
+      <!-- Texto de convite — altere livremente -->
+      <p class="contato-text fade-up">
+        O primeiro passo é agendar nossa entrevista inicial.<br>
+        Nela, nos conhecemos, você me conta o que te traz aqui e decidimos juntos se seguiremos.
+      </p>
+
+      <!-- BOTÃO PRINCIPAL DE CONTATO — altere o link do WhatsApp -->
+      <a href="https://wa.me/5521995485887?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20entrevista%20inicial" class="btn-cta" style="font-size: 0.85rem; padding: 1.1rem 3rem;" target="_blank" class="fade-up">
+        Agendar pelo WhatsApp
+      </a>
+
+      <!-- Links de contato adicionais -->
+      <div class="contato-links fade-up">
+
+        <!-- WhatsApp — altere o número -->
+        <a href="https://wa.me/5521995485887" class="contato-link-item" target="_blank">
+          <span></span>
+          WhatsApp · (21) 99548-5887
+        </a>
+
+        <!-- Instagram — altere o @ -->
+        <a href="https://instagram.com/laismorandin" class="contato-link-item" target="_blank">
+          <span></span>
+          Instagram · @laismorandin
+        </a>
+
+        <!-- E-mail — altere o endereço -->
+        <a href="mailto:morandinlais@gmail.com" class="contato-link-item">
+          <span></span>
+          morandinlais@gmail.com
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =============================================
+       FOOTER
+       Altere o nome, CRP e ano
+  ============================================== -->
+  <footer>
+    <div class="footer-logo">Laís Morandin</div>
+    <div>CRP XXXZZZWWW · Psicóloga Clínica · Psicanálise</div>
+    <div>© 2025 · Todos os direitos reservados</div>
+  </footer>
+
+
+  <!-- =============================================
+       JAVASCRIPT
+       FAQ accordion + animações de scroll
+       Não é necessário alterar para conteúdo
+  ============================================== -->
+  <script>
+    // FAQ accordion
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+
+    // Animação de fade-up no scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
